@@ -64,12 +64,13 @@ Recorder::Recorder(
   const rosbag2_transport::RecordOptions & record_options,
   const std::string & node_name,
   const rclcpp::NodeOptions & node_options)
-: rclcpp::Node(node_name, rclcpp::NodeOptions(node_options).start_parameter_event_publisher(false)),
+: rclcpp::Node(node_name),
   writer_(std::move(writer)),
   storage_options_(storage_options),
   record_options_(record_options),
   stop_discovery_(record_options_.is_discovery_disabled)
 {
+  this->set_parameter(rclcpp::Parameter("use_sim_time", true));
 }
 
 Recorder::~Recorder()
