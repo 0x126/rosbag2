@@ -247,6 +247,7 @@ Recorder::create_subscription(
       *bag_message->serialized_data = message->release_rcl_serialized_message();
       bag_message->topic_name = topic_name;
       rcutils_time_point_value_t time_stamp = this->get_clock()->now().nanoseconds();
+      if(time_stamp == 0) return;
       // rcutils_time_point_value_t time_stamp;
       // int error = rcutils_system_time_now(&time_stamp);
       // if (error != RCUTILS_RET_OK) {
